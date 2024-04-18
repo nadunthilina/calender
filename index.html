@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calendar</title>
+</head>
+<body>
+    <div class="hero">
+        <div class="calendar">
+            <div class="left">
+                <p id="date">01</p>
+                <p id="day">Monday</p>
+            </div>
+            <div class="right">
+                <p id="month">January</p>
+                <p id="year">2024</p>
+            </div>
+        </div>
+        <div class="jump-to-date">
+            <label for="jump-date">Jump to Date:</label>
+            <input type="date" id="jump-date">
+            <button onclick="jumpToDate()">Go</button>
+        </div>
+    </div>
+
+    <script>
+        const date = document.getElementById("date");
+        const day = document.getElementById("day");
+        const month = document.getElementById("month");
+        const year = document.getElementById("year");
+        const jumpInput = document.getElementById("jump-date");
+
+        function updateCalendar(selectedDate) {
+            const selected = new Date(selectedDate);
+            date.innerHTML = (selected.getDate() < 10 ? "0" : "") + selected.getDate();
+            day.innerHTML = weekDays[selected.getDay()];
+            month.innerHTML = allMonths[selected.getMonth()];
+            year.innerHTML = selected.getFullYear();
+        }
+
+        function jumpToDate() {
+            const selectedDate = jumpInput.value;
+            if (selectedDate) {
+                updateCalendar(selectedDate);
+            }
+        }
+
+        const today = new Date();
+        const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const allMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        updateCalendar(today);
+    </script>
+</body>
+</html>
